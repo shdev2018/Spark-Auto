@@ -1,0 +1,93 @@
+﻿@page
+@model SparkAuto.Pages.Cars.CreateModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Add New Car</h2>
+<br />
+<div class="row background-white border">
+    <div class="col-8">
+        <form method="post">
+            <input hidden asp-for="Car.UserId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Car.VIN" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Car.VIN" class="form-control" autofocus />
+                </div>
+                <span asp-validation-for="Car.VIN" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Car.Make" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Car.Make" class="form-control" autofocus />
+                </div>
+                <span asp-validation-for="Car.Make" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Car.Model" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Car.Model" class="form-control" autofocus />
+                </div>
+                <span asp-validation-for="Car.Model" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Car.Style" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Car.Style" class="form-control" autofocus />
+                </div>
+                <span asp-validation-for="Car.Style" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Car.Year" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Car.Year" class="form-control" autofocus />
+                </div>
+                <span asp-validation-for="Car.Year" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Car.Miles" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Car.Miles" class="form-control" autofocus />
+                </div>
+                <span asp-validation-for="Car.Miles" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Car.Colour" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Car.Colour" class="form-control" autofocus />
+                </div>
+                <span asp-validation-for="Car.Colour" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-3 offset-2 text-center">
+                    <input type="submit" value="Create" class="btn btn-primary form-control" />
+                </div>
+                <div class="col-3 text-center">
+                    <a asp-page="Index" asp-route-userId="@Model.Car.UserId" class="btn btn-success form-control">Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,105 @@
+﻿@page
+@model SparkAuto.Pages.Users.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="row background-white border">
+    <div class="col-6 pb-4">
+        <h2 class="text-info">Customers List</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info">
+            <i class="fas fa-plus">
+                &nbsp; Add New Customer
+            </i>
+        </a>
+    </div>
+    <form method="get" class="col-12">
+        <div style="height: 60px; margin-bottom: 10px;" class="container border border-secondary">
+            <div class="row">
+                <div class="col-11">
+                    <div class="row" style="padding-top: 10px;">
+                        <div class="col-4">
+                            @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control", placeholder = "Name..." } })
+                        </div>
+                        <div class="col-4">
+                            @Html.Editor("searchEmail", new { htmlAttributes = new { @class = "form-control", placeholder = "Email..." } })
+                        </div>
+                        <div class="col-4">
+                            @Html.Editor("searchPhone", new { htmlAttributes = new { @class = "form-control", placeholder = "Phone..." } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <div class="row" style="padding-top: 10px; padding-right: 15px;">
+                        <button type="submit" name="submit" value="Search" class="btn btn-info form-control">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form method="post" class="col-12">
+        @if (Model.UserListVM.ApplicationUserList.Count == 0)
+        {
+            <p class="text-danger">There are no customers registered.</p>
+        }
+        else
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        @Html.DisplayNameFor(m => m.UserListVM.ApplicationUserList[0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.UserListVM.ApplicationUserList[0].Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.UserListVM.ApplicationUserList[0].PhoneNumber)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.UserListVM.ApplicationUserList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.PhoneNumber)
+                        </td>
+                        <td>
+                            <a asp-page="../Cars/Index" asp-route-userId="@item.Id" style="text-decoration: none;">
+                                <img src="~/Images/car.png" width="40" /> &nbsp; View Cars
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group text-white" role="group">
+                                <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-primary" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button asp-page-handler="Delete" asp-route-id="@item.Id" class="btn btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this?')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="5" class="text-right">
+                        <div page-model="@Model.UserListVM.PagingInfo" asp-action="Index" page-class="btn border" page-class-normal="btn btn-light"
+                             page-class-selected="btn btn-info active" class="btn-group"></div>
+                    </td>
+                </tr>
+            </table>
+        }
+    </form>    
+</div>

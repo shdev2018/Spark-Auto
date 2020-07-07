@@ -1,0 +1,18 @@
+﻿@page
+@model SparkAuto.Areas.Identity.Pages.Account.VerifyEmailModel
+
+<h1>Confirm Your Email Address</h1>
+
+<form method="post">
+    <div>
+        <p>
+            Please Confirm your email before proceeding.
+            <br /><br />
+            If you haven't received an email, click the button to resend.
+            <br /><br />
+            <button type="submit" class="btn btn-success" asp-route-id="@Model.Email">Resend Email</button>
+            <br /><br />
+            Remember to check your spam!
+        </p>
+    </div>
+</form>

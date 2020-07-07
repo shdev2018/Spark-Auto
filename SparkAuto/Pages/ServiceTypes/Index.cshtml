@@ -1,0 +1,64 @@
+﻿@page
+@model SparkAuto.Pages.ServiceTypes.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="row background-white border">
+    <div class="col-6 pb-4">
+        <h2 class="text-info">Service Type List</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-page="Create" class="btn btn-info">
+            <i class="fas fa-plus">
+                &nbsp; Create New
+            </i>
+        </a>
+    </div>
+    @if (Model.ServiceType.Count == 0)
+    {
+        <p class="text-danger">No Service Types Available! Please create a new service type to display.</p>
+    }
+    else
+    {
+        <form method="post" class="col-12">
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        @Html.DisplayNameFor(m => m.ServiceType[0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.ServiceType[0].Price)
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.ServiceType)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Price)
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group text-white" role="group">
+                                <a asp-page="Edit" asp-route-id="@item.id" class="btn btn-primary" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-page="Details" asp-route-id="@item.id" class="btn btn-success" title="Details">
+                                    <i class="far fa-file-alt"></i>
+                                </a>
+                                <button asp-page-handler="Delete" asp-route-id="@item.id" class="btn btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this?')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </form>
+    }
+</div>

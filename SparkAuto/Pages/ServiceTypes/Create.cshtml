@@ -1,0 +1,48 @@
+﻿@page
+@model SparkAuto.Pages.ServiceTypes.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Create New Service Type</h2>
+<br />
+<div class="row background-white border">
+    <div class="col-8">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="ServiceType.Name" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="ServiceType.Name" class="form-control" autofocus/>
+                </div>
+                <span asp-validation-for="ServiceType.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="ServiceType.Price" class="control-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="ServiceType.Price" class="form-control" />
+                </div>
+                <span asp-validation-for="ServiceType.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-3 offset-2 text-center">
+                    <input type="submit" value="Create" class="btn btn-primary form-control" />
+                </div>
+                <div class="col-3 text-center">
+                    <a asp-page="Index" class="btn btn-success form-control">Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
